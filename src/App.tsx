@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react"
 
-function App() {
-  const [count, setCount] = useState(0)
+// Tengo que pasarle el tipo de dato que va a a contener el optionsFormatDate
+// porque no lo reconoce si lo paso sin tipo al toLocaleTimeString
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+const optionsFormatDate: Intl.DateTimeFormatOptions = {
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    hour12: true,
+    // Esto hará que el formato sea de 12 horas
 }
 
-export default App
+export const App = () => {
+    const [time, setTime] = useState<string>()
+
+    useEffect(() => {
+        const updateTime = () => {
+            const date = new Date()
+            const dateLocal = date.toLocaleTimeString('en-US', optionsFormatDate);
+
+            setTime(dateLocal)
+        }
+
+        updateTime()
+
+        const interval = setInterval(() => {
+            updateTime();
+        }, 1000)
+
+        return () => clearInterval(interval)
+    }, [])
+
+    return (
+        <div className="bg-black h-screen flex justify-center items-center">
+            <h1 className="text-white text-8xl" style={{ fontFamily: "Share Tech Mono" }}>{time}</h1>
+        </div>
+    )
+}
