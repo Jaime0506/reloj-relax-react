@@ -32,8 +32,8 @@ export const Clock = () => {
     }, [])
 
     return (
-        <div className="bg-black h-screen flex justify-center items-center">
-            <h1 className="text-white text-8xl" style={{ fontFamily: "Share Tech Mono" }}>{time}</h1>
+        <div className="flex justify-center items-center h-full">
+            <h1 className="text-white text-6xl" style={{ fontFamily: "Share Tech Mono" }}>{time}</h1>
         </div>
     )
 }
