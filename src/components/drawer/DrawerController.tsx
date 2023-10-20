@@ -1,8 +1,8 @@
 import { motion, AnimatePresence } from 'framer-motion'
 
-import { useWidth } from '../hooks'
+import { useResizeWindow } from '../../hooks'
 import { Drawer } from './Drawer'
-import { widthDrawerController } from '../helpers'
+import { widthDrawerController } from '../../helpers'
 
 interface Props {
     isOpen: boolean
@@ -10,7 +10,7 @@ interface Props {
 
 export const DrawerController = ({ isOpen}: Props) => {
 
-    const { width } = useWidth()
+    const { width } = useResizeWindow()
    
     return (
         <AnimatePresence>

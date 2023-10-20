@@ -1,6 +1,7 @@
 
 import { useState } from "react"
-import { Clock, DrawerController, Navbar } from "./components"
+import { ClockWrapper, DrawerController, ModalWrapper, Navbar, PomodoroWrapper } from "./components"
+
 
 export const App = () => {
 
@@ -11,13 +12,22 @@ export const App = () => {
     }
 
     return (
-        <main className="flex">
-            <DrawerController isOpen={isOpen} />
+        <>
+            <main className="flex">
+                <DrawerController isOpen={isOpen} />
 
-            <section className="bg-black h-screen flex flex-col flex-1">
-                <Navbar toggleDrawer={toggleDrawer} />
-                <Clock />
-            </section>
-        </main>
+                <section className="bg-black h-screen flex flex-col flex-1">
+                    <Navbar toggleDrawer={toggleDrawer} />
+                    <div className="flex justify-center items-center h-full flex-col gap-10">
+                        <ClockWrapper />
+                        <PomodoroWrapper />
+                    </div>
+                </section>
+            </main>
+
+            <ModalWrapper>
+                Emote
+            </ModalWrapper>
+        </>
     )
 }

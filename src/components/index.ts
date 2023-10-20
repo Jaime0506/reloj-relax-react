@@ -1,3 +1,5 @@
-export * from './Clock'
+export * from './clock'
 export * from './Navbar'
-export * from './DrawerController'
+export * from './drawer'
+export * from './pomodoro'
+export * from './modal'
