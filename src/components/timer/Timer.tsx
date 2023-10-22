@@ -24,11 +24,12 @@ export const Timer = () => {
     const [timer, setTimer] = useState<Timer>(initialState)
 
     const changeTime = () => {
-        
+        setTimer({...timer})
     }
 
+    // Correcion error de Ts al no usar la funcion ni el setTimer del useState
     return (
-        <div>
+        <div onClick={changeTime}>
             <span className='font-clock'>
                 { timer.minutes }:{ timer.seconds > 9 ? timer.seconds : timer.seconds + "0"}
             </span>
