@@ -1,6 +1,6 @@
 
 import { useState } from "react"
-import { ClockWrapper, DrawerController, ModalWrapper, Navbar, PomodoroWrapper } from "./components"
+import { ClockWrapper, DrawerController, ModalWrapper, Navbar, PomodoroWrapper, WrapperTimer } from "./components"
 
 
 export const App = () => {
@@ -26,7 +26,7 @@ export const App = () => {
             </main>
 
             <ModalWrapper>
-                Emote
+               <WrapperTimer />
             </ModalWrapper>
         </>
     )
