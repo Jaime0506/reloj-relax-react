@@ -7,7 +7,7 @@ interface Props {
 
 export const Modal = ({ children }: Props) => {
 
-    const { width, heigth } = useResizeWindow()
+    const { width } = useResizeWindow()
 
     // Como mi Modal esta contenido en mi WrapperModal, al yo definir un onClick a mi WrapperModal
     // ese onClcik se va a disparar cuando haga click en mi modal porque la propagacion del evento
@@ -20,8 +20,8 @@ export const Modal = ({ children }: Props) => {
 
     return (
         <main 
-            className='bg-white p-4 rounded-md flex z-10' 
-            style={{ minWidth: width / 1.5, minHeight: heigth / 2 }} 
+            className='bg-white p-4 rounded-md flex' 
+            style={{ minWidth: width / 1.8 }} 
             onClick={handleModalClick}
         >
             {children}
