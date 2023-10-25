@@ -1,93 +1,59 @@
-import { useState,  useEffect } from 'react'
+import { useState, useEffect } from 'react'
+
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { TimeClock } from '@mui/x-date-pickers/TimeClock';
+import dayjs from 'dayjs';
+
+import type { Dayjs } from 'dayjs';
+
+import './index.css'
 
 interface Timer {
-    minutes: number,
-    seconds: number
+    pomodoro: Dayjs | null
 }
 
 interface Props {
-    type: 'focus' | 'relax'
+    type?: 'focus' | 'relax'
 }
 
 const initialState: Timer = {
-    minutes: 20,
-    seconds: 0,
+    pomodoro: dayjs('2022-04-17T15:30')
 }
 
 export const Timer = ({ type }: Props) => {
     const [timer, setTimer] = useState<Timer>(initialState)
 
     useEffect(() => {
-        if (type == "focus") {
-            setTimer({
-                minutes: 20,
-                seconds: 0
-            })
-        }
+        console.log(timer.pomodoro)
+    }, [timer.pomodoro])
 
-        if (type == "relax") {
-            setTimer({
-                minutes: 5,
-                seconds: 0
-            })
-        }
-    }, [type])
-    
-
-    const incrementMinutes = () => {
-        setTimer({ ...timer, ["minutes"]: timer.minutes + 1 })
-    }
-
-    const decrementMinutes = () => {
-        if (timer.minutes != 1) {
-            setTimer({ ...timer, ["minutes"]: timer.minutes - 1 })
-        }
-    }
-
-    const incrementSeconds = () => {
-        setTimer({ ...timer, ["seconds"]: timer.seconds + 1 })
-    }
-
-    const decrementsSeconds = () => {
-        if (timer.seconds != 0) {
-            setTimer({ ...timer, ["seconds"]: timer.seconds - 1 })
-        }
+    const onChangeClock = (event: Dayjs | null) =>  {
+        setTimer({
+            ...timer,
+            pomodoro: event
+        });
     }
 
     // Correcion error de Ts al no usar la funcion ni el setTimer del useState
     return (
-        <div className='flex w-full flex-col text-center'>
-            <h1 className='pb-2 text-gray-400'>{type == "focus" ? "Timer for focus" : "Time for relax"}</h1>
-            <span className='flex justify-center bg-white text-4xl text-center items-center'>
-                <div className='text-4xl'>
-                    <button
-                        onClick={incrementMinutes}
-                        className='rounded-sm'
-                    >
-                        <i className="fa-solid fa-chevron-up"></i>
-                    </button>
-                    <h3 className='bg-black font-clock text-white p-2 rounded-l-sm'>
-                        {timer.minutes > 9 ? timer.minutes : "0" + timer.minutes}
-                    </h3>
-                    <button onClick={decrementMinutes}>
-                        <i className="fa-solid fa-chevron-down"></i>
-                    </button>
-                </div>
+        <div className='flex w-full flex-row text-center'>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={['TimeClock']}>
+                    <DemoItem>
+                        <TimeClock
+                            views={['minutes']}
+                            onChange={onChangeClock} 
+                        />
+                    </DemoItem>
+                </DemoContainer>
+            </LocalizationProvider>
 
-                <p className='bg-black text-white h-14'>:</p>
-
-                <div className='text-4xl'>
-                    <button onClick={incrementSeconds}>
-                        <i className="fa-solid fa-chevron-up"></i>
-                    </button>
-                    <h3 className='bg-black font-clock text-white p-2 rounded-r-sm'>
-                        {timer.seconds > 9 ? timer.seconds : "0" + timer.seconds}
-                    </h3>
-                    <button onClick={decrementsSeconds}>
-                        <i className="fa-solid fa-chevron-down"></i>
-                    </button>
-                </div>
-            </span>
+            <section className='pt-5 flex flex-col items-center bg-red-400 flex-1'> 
+                <h2>Pomodoro Time</h2>
+                <p>{timer.pomodoro?.minute()}: 00</p>
+            </section>
         </div>
     )
 }

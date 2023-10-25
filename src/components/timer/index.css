@@ -1,0 +1,17 @@
+.MuiClock-clock {
+    background-color: rgb(0 0 0 / 16%) !important;
+}
+
+.MuiClock-pin {
+    background-color: black !important;
+}
+
+.MuiClockPointer-root {
+    background-color: black !important;
+}
+
+.MuiClockPointer-thumb {
+    background-color: black !important;
+    border: 16px solid black !important;
+    /* border: !important; */
+}
