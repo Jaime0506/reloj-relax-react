@@ -15,3 +15,11 @@
     border: 16px solid black !important;
     /* border: !important; */
 }
+
+.MuiTimeClock-root {
+    width: 255px !important;
+}
+
+.MuiClock-root {
+    margin: 0 !important;
+}

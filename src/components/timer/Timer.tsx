@@ -11,29 +11,43 @@ import type { Dayjs } from 'dayjs';
 import './index.css'
 
 interface Timer {
-    pomodoro: Dayjs | null
+    pomodoro: number | undefined
+    relax: number | undefined
 }
 
-interface Props {
-    type?: 'focus' | 'relax'
-}
+type TimerSelected = "focus" | "relax"
 
 const initialState: Timer = {
-    pomodoro: dayjs('2022-04-17T15:30')
+    pomodoro: dayjs().minute(),
+    relax: dayjs().minute()
 }
 
-export const Timer = ({ type }: Props) => {
+export const Timer = () => {
     const [timer, setTimer] = useState<Timer>(initialState)
+    const [timerSelected, setTimerSelected] = useState<TimerSelected>("focus")
 
     useEffect(() => {
         console.log(timer.pomodoro)
     }, [timer.pomodoro])
 
-    const onChangeClock = (event: Dayjs | null) =>  {
-        setTimer({
-            ...timer,
-            pomodoro: event
-        });
+    const onChangeClock = (event: Dayjs | null , type: TimerSelected) => {
+        if (type === 'focus') {
+            setTimer({
+                ...timer,
+                pomodoro: event?.minute()
+            });
+        }
+        
+        if (type === 'relax') {
+            setTimer({
+                ...timer,
+                relax: event?.minute()
+            })
+        }
+    }
+
+    const changeTimerSelected = (type: TimerSelected) => {
+        setTimerSelected(type)
     }
 
     // Correcion error de Ts al no usar la funcion ni el setTimer del useState
@@ -44,15 +58,33 @@ export const Timer = ({ type }: Props) => {
                     <DemoItem>
                         <TimeClock
                             views={['minutes']}
-                            onChange={onChangeClock} 
+                            onChange={(e: Dayjs | null) => onChangeClock(e, timerSelected)}
+                            className=''
                         />
                     </DemoItem>
                 </DemoContainer>
             </LocalizationProvider>
 
-            <section className='pt-5 flex flex-col items-center bg-red-400 flex-1'> 
-                <h2>Pomodoro Time</h2>
-                <p>{timer.pomodoro?.minute()}: 00</p>
+            <section className='flex flex-col items-center flex-1 justify-around'>
+                <article className='p-2 flex flex-col gap-2'>
+                    <h2 className=' text-left underline-offset-1'>Focus Time</h2>
+                    <p 
+                        className='bg-black text-white rounded-sm font-clock hover:cursor-pointer text-4xl pl-3 pr-3 pt-1 pb-1'
+                        onClick={() => changeTimerSelected("focus")}
+                    >
+                        {timer.pomodoro} : 00
+                    </p>
+                </article>
+
+            <article className='p-2 flex flex-col gap-2'>
+                    <h2 className='text-left'>Relax Time</h2>
+                    <p 
+                        className='bg-black text-white rounded-sm font-clock hover:cursor-pointer text-4xl pl-3 pr-3 pt-1 pb-1'
+                        onClick={() => changeTimerSelected("relax")}
+                    >
+                        {timer.relax} : 00
+                    </p>
+                </article>
             </section>
         </div>
     )
