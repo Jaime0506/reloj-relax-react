@@ -3,8 +3,8 @@ import { Timer } from "./"
 export const WrapperTimer = () => {
     return (
         <>
-            <main className="rounded-md flex flex-col p-2 w-full justify-center items-center gap-3">
-                <section className="bg-white flex flex-1 flex-row w-full justify-center items-center">
+            <main className="rounded-md flex flex-col p-2">
+                <section>
                     <Timer />
                 </section>
             </main>

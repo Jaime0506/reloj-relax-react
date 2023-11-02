@@ -1,13 +1,10 @@
 import { ReactNode } from "react"
-import { useResizeWindow } from "../../hooks"
 
 interface Props {
     children: ReactNode
 }
 
 export const Modal = ({ children }: Props) => {
-
-    const { width } = useResizeWindow()
 
     // Como mi Modal esta contenido en mi WrapperModal, al yo definir un onClick a mi WrapperModal
     // ese onClcik se va a disparar cuando haga click en mi modal porque la propagacion del evento
@@ -20,8 +17,8 @@ export const Modal = ({ children }: Props) => {
 
     return (
         <main 
-            className='bg-white p-4 rounded-md flex' 
-            style={{ minWidth: width / 1.8 }} 
+            className='bg-white p-4 rounded-md flex max-w-xs min-w-max' 
+            style={{ }} 
             onClick={handleModalClick}
         >
             {children}
