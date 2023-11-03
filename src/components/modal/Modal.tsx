@@ -18,7 +18,6 @@ export const Modal = ({ children }: Props) => {
     return (
         <main 
             className='bg-white p-4 rounded-md flex max-w-xs min-w-max' 
-            style={{ }} 
             onClick={handleModalClick}
         >
             {children}

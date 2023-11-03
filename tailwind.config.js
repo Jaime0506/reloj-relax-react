@@ -21,7 +21,7 @@ export default {
       keyframes: {
         bounce_clock: {
           '0%, 100%': {
-            transform: "translateY(-10%)",
+            transform: "translateY(-5%)",
             animationTimingFunction: "cubic- bezier(0.8, 0, 1, 1)"
           },
           '50%': {
