@@ -18,7 +18,7 @@ export const App = () => {
 
                 <section className="bg-black h-screen flex flex-col flex-1">
                     <Navbar toggleDrawer={toggleDrawer} />
-                    <div className="flex justify-center items-center h-full flex-col gap-10">
+                    <div className="flex justify-center items-center h-full flex-col">
                         <ClockWrapper />
                         <PomodoroWrapper />
                     </div>

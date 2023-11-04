@@ -4,13 +4,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import dayjs from 'dayjs'
 
 import type { Dayjs } from 'dayjs'
-
-type TimerSelected = "focus" | "relax"
-
-interface Timer {
-    pomodoro: number | undefined
-    relax: number | undefined
-}
+import type { Timer, TimerTypeSelection } from '../../types'
 
 interface TimerChanged {
     pomodoro: boolean,
@@ -20,18 +14,21 @@ interface TimerChanged {
 interface Props {
     setTimer: (value: Timer) => void
     setHasChanged: (value: TimerChanged) => void
-    timerSelected: TimerSelected
+    timerSelected: TimerTypeSelection
     timer: Timer
     hasChanged: TimerChanged
 }
 
 export const SelectTime = ({setTimer, setHasChanged, timerSelected, timer, hasChanged}: Props) => {
 
-    const onChangeClock = (event: Dayjs | null, type: TimerSelected) => {
+    const onChangeClock = (event: Dayjs | null, type: TimerTypeSelection) => {
         if (type === 'focus') {
             setTimer({
                 ...timer,
-                pomodoro: event?.minute()
+                ["pomodoro"]: {
+                    minute: event?.minute(),
+                    seconds: 0
+                }
             });
 
             setHasChanged({
@@ -43,7 +40,10 @@ export const SelectTime = ({setTimer, setHasChanged, timerSelected, timer, hasCh
         if (type === 'relax') {
             setTimer({
                 ...timer,
-                relax: event?.minute()
+                ["relax"]: {
+                    minute: event?.minute(),
+                    seconds: 0
+                }
             })
             setHasChanged({
                 ...hasChanged,
