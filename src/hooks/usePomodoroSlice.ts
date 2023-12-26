@@ -7,8 +7,9 @@ export const usePomodoroSlice = () => {
     const dispatch = useAppDispatch()
     
     const onAddTimer = (timer: Timer) => {
-        console.log(timer)
-        dispatch(addTimer(timer))
+        const UUID = crypto.randomUUID()
+
+        dispatch(addTimer({...timer, uid: UUID}))
     }
 
     return {

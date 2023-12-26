@@ -1,4 +1,6 @@
 export interface Timer {
+    uid: string | null,
+
     pomodoro: {
         minute: number | undefined
         seconds: number | undefined

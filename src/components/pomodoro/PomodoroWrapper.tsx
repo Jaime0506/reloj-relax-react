@@ -1,4 +1,5 @@
 import { usePomodoroSlice, useUiStore } from "../../hooks"
+import { PomodoroItem } from "./PomodoroItem"
 
 export const PomodoroWrapper = () => {
 
@@ -14,16 +15,8 @@ export const PomodoroWrapper = () => {
                 <p className="text-gray-400 font-thin text-sm">Add pomodoro timer</p>
             </header>
 
-            <section className="bg-gray-100 mt-6 rounded p-4 flex w-[324px] flex-col gap-4">
-                {
-                    timers.map((timer) => {
-                        return (
-                            <article className="w-[292px] rounded bg-white shadow-sm p-4">
-                                <p>{timer.pomodoro.minute != undefined && timer.pomodoro.minute > 9 ? timer.pomodoro.minute : "0" + timer.pomodoro.minute} : 00</p>
-                            </article>
-                        )
-                    })
-                }
+            <section className="mt-7 rounded flex w-[324px] flex-col gap-4 items-center">
+                { timers.map((timer) => (<PomodoroItem key={timer.uid} {...timer}/> )) }
             </section>
         </div>
     )

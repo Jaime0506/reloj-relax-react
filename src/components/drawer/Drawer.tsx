@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 
 export const Drawer = () => {
+
+    // esto envuelve el contenigo que va a tener el Drawer
     return (
         <motion.section className="bg-green p-4" >
             <motion.div 

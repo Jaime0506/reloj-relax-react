@@ -11,6 +11,7 @@ import type { TimerTypeSelection, Timer as TypeTimer } from '../../types';
 import './index.css'
 
 const initialState: TypeTimer = {
+    uid: null,
     pomodoro: {
         minute: dayjs().set('minute', 20).minute(),
         seconds: 0
@@ -40,9 +41,10 @@ export const Timer = () => {
 
     const handleAddTimer = () => {
         handleCloseModal()
+        
+        setTimer({...timer})
         onAddTimer(timer)
     }
-
     return (
         <main className='flex flex-col gap-4'>
             <div className='flex w-full flex-row text-center gap-10'>
@@ -77,7 +79,6 @@ export const Timer = () => {
                     </motion.button>
                 )}
             </AnimatePresence>
-
         </main>
     )
 }
