@@ -1,45 +1,47 @@
 import { useEffect, useState } from "react"
 import { Timer } from "../../types"
-import { separateMinutesFromSeconds } from "../../helpers"
 
-export const PomodoroItem = ({ pomodoro }: Timer) => {
+const calculateTimeLeft = (minutes: number | undefined, seconds: number | undefined): number => {
+    if (minutes != undefined &&  seconds != undefined) {
+        return minutes * 60 + seconds
+    }
 
-    const [time, setTime] = useState(pomodoro)
+    return 0
+}
 
+const formatTime = (seconds: number): string => {
+    const formattedMinutes = Math.floor(seconds / 60)
+    const formattedSeconds = seconds % 60
+
+    console.log(seconds)
+
+    return `${String(formattedMinutes).padStart(2, "0")}:${String(formattedSeconds).padStart(2, "0")}`
+}
+
+export const PomodoroItem = ({ pomodoro: { minute, seconds } }: Timer) => {
+
+    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(minute, seconds))
+    
     useEffect(() => {
+        const interval = setInterval(() => {
+            setTimeLeft((prevTime) => {
+                const newTime = prevTime - 1
 
-        if (time.minute != null && time.seconds != null) {
-            let totalTime = time.minute * 60 + time.seconds
-
-            const interval = setInterval(() => {
-                totalTime--;
-
-                if (totalTime <= 0) {
-                    clearInterval(interval);
-                    console.log("¡Tiempo agotado!");
+                if (newTime >= 0) {
+                    return newTime
                 } else {
-                    // Singinifica que podemos seguir restando al tiempo segundos
-                    // Necesito entonces convertir los segundos nuevamente en el formato que llegaron
-                    
-                    const {wholePart, decimalPart} = separateMinutesFromSeconds(totalTime)
-                    
-                    
-
-                    // setTime({
-                    //     ...time,
-                    //     minute: wholePart,
-                    //     seconds: decimalPart
-                    // })
+                    clearInterval(interval)
+                    return 0
                 }
-            }, 1000)
-        }
+            })
+        }, 1000)
 
-        console.log(time)
-    }, [time])
+        return () => clearInterval(interval)
+    }, [])
 
     return (
         <article className="w-[292px] rounded bg-white shadow-sm p-4">
-            <p className="text-lg">{pomodoro.minute != undefined && pomodoro.minute > 9 ? pomodoro.minute : "0" + pomodoro.minute} : 00</p>
+            <p className="text-lg">{formatTime(timeLeft)}</p>
         </article>
     )
 }
