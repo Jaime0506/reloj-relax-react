@@ -1,11 +1,11 @@
-import { usePomodoroSlice, useUiStore } from "../../hooks"
-import { PomodoroItem } from "./PomodoroItem"
+import { useUiStore } from "../../hooks"
+import { PomodoroList } from "./PomodoroList"
+
 
 export const PomodoroWrapper = () => {
-
+    
     const { handleOpenModal } = useUiStore()
-    const { timers } = usePomodoroSlice()
-
+    
     return (
         <div className="flex justify-center items-center flex-col mt-5">
             <header className="flex justify-center items-center h-10 flex-col gap-2">
@@ -15,9 +15,7 @@ export const PomodoroWrapper = () => {
                 <p className="text-gray-400 font-thin text-sm">Add pomodoro timer</p>
             </header>
 
-            <section className="mt-7 rounded flex w-[324px] flex-col gap-4 items-center">
-                { timers.map((timer) => (<PomodoroItem key={timer.uid} {...timer}/> )) }
-            </section>
+            <PomodoroList />
         </div>
     )
 }

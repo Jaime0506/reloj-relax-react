@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "."
 import { addTimer } from "../store/pomodoro"
 import { Timer } from "../types"
 
-export const usePomodoroSlice = () => {
+export const usePomodoroStore = () => {
     const { status, timers } = useAppSelector(state => state.pomodoro)
     const dispatch = useAppDispatch()
     

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion';
 import dayjs from 'dayjs';
 
-import { usePomodoroSlice, useUiStore } from '../../hooks';
+import { usePomodoroStore, useUiStore } from '../../hooks';
 import { SelectTime, SelectedClockValues } from '.';
 
 import type { TimerTypeSelection, Timer as TypeTimer } from '../../types';
@@ -25,7 +25,7 @@ const initialState: TypeTimer = {
 
 export const Timer = () => {
     const { handleCloseModal } = useUiStore()
-    const { onAddTimer } = usePomodoroSlice()
+    const { onAddTimer } = usePomodoroStore()
 
     const [timer, setTimer] = useState<TypeTimer>(initialState)
     const [timerSelected, setTimerSelected] = useState<TimerTypeSelection>("focus")

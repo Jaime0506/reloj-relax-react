@@ -1,27 +1,11 @@
 import { useEffect, useState } from "react"
-import { Timer } from "../../types"
-
-const calculateTimeLeft = (minutes: number | undefined, seconds: number | undefined): number => {
-    if (minutes != undefined &&  seconds != undefined) {
-        return minutes * 60 + seconds
-    }
-
-    return 0
-}
-
-const formatTime = (seconds: number): string => {
-    const formattedMinutes = Math.floor(seconds / 60)
-    const formattedSeconds = seconds % 60
-
-    console.log(seconds)
-
-    return `${String(formattedMinutes).padStart(2, "0")}:${String(formattedSeconds).padStart(2, "0")}`
-}
+import type { Timer } from "../../types"
+import { calculateTimeLeft, formatTime } from "../../helpers"
 
 export const PomodoroItem = ({ pomodoro: { minute, seconds } }: Timer) => {
 
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(minute, seconds))
-    
+
     useEffect(() => {
         const interval = setInterval(() => {
             setTimeLeft((prevTime) => {
@@ -40,8 +24,14 @@ export const PomodoroItem = ({ pomodoro: { minute, seconds } }: Timer) => {
     }, [])
 
     return (
-        <article className="w-[292px] rounded bg-white shadow-sm p-4">
-            <p className="text-lg">{formatTime(timeLeft)}</p>
+        <article className="w-[292px] rounded bg-white shadow-sm p-4 flex ">
+            <header className="flex-1">
+                <p className="text-lg">{formatTime(timeLeft)}</p>
+            </header>
+
+            <footer className="">
+                <i className="fa-solid fa-circle-xmark text-xl hover:cursor-pointer text-red-500"></i>
+            </footer>
         </article>
     )
 }
