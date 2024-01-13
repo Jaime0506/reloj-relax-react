@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "."
-import { addTimer } from "../store/pomodoro"
-import { Timer } from "../types"
+import { addTimer, deleteTimer } from "../store/pomodoro"
+import type { Timer } from "../types"
 
 export const usePomodoroStore = () => {
     const { status, timers } = useAppSelector(state => state.pomodoro)
@@ -12,11 +12,16 @@ export const usePomodoroStore = () => {
         dispatch(addTimer({...timer, uid: UUID}))
     }
 
+    const onDeleteTimer = (uid: string | null) => {
+        if (uid) dispatch(deleteTimer(uid))
+    }
+
     return {
         status,
         timers,
 
-        onAddTimer
+        onAddTimer,
+        onDeleteTimer
     }
 
 }

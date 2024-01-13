@@ -18,8 +18,12 @@ export const pomodoroSlice = createSlice({
     reducers: {
         addTimer: (status, action: PayloadAction<Timer> ) => {
             status.timers.push(action.payload)
-        }
+        },
+
+        deleteTimer: (state, action: PayloadAction<string>) => {
+            state.timers = state.timers.filter(item => item.uid !== action.payload)
+        },
     },
 });
 
-export const { addTimer } = pomodoroSlice.actions;
+export const { addTimer, deleteTimer } = pomodoroSlice.actions;
