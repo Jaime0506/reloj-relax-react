@@ -12,9 +12,10 @@ export const Modal = ({ children }: Props) => {
     // Modal, capturar el evento onClick y tener la propagacion a sus nodos padres en este caso WrapperModal
     const handleModalClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
         // Evita la propagación del clic hacia arriba
+        
         e.stopPropagation(); 
     }
-
+    
     return (
         <main 
             className='bg-white p-4 rounded-md flex max-w-xs min-w-max' 

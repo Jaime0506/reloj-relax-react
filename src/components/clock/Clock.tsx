@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react"
-import { useUiStore } from "../../hooks"
+
+interface ClockProps {
+    isOpen: boolean
+}
 
 // Tengo que pasarle el tipo de dato que va a a contener el optionsFormatDate
 // porque no lo reconoce si lo paso sin tipo al toLocaleTimeString
@@ -11,9 +14,8 @@ const optionsFormatDate: Intl.DateTimeFormatOptions = {
     // Esto hará que el formato sea de 12 horas
 }
 
-export const Clock = () => {
+export const Clock = ({ isOpen }: ClockProps) => {
 
-    const { modal: { isOpen } } = useUiStore()
     const [time, setTime] = useState<string>()
 
     useEffect(() => {

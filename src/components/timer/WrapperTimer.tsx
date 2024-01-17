@@ -1,11 +1,14 @@
 import { Timer } from "./"
 
-export const WrapperTimer = () => {
+interface WrapperTimerProps {
+    closeModal: () => void
+}
+export const WrapperTimer = ({ closeModal }: WrapperTimerProps) => {
     return (
         <>
             <main className="rounded-md flex flex-col p-2">
                 <section>
-                    <Timer />
+                    <Timer closeModal={closeModal}/>
                 </section>
             </main>
         </>
