@@ -27,7 +27,7 @@ export const App = () => {
                     <Navbar toggleDrawer={toggleDrawer} />
                     <div className="flex justify-center items-center h-full flex-col">
                         <ClockWrapper isOpen={isOpenModal}/>
-                        <PomodoroWrapper />
+                        <PomodoroWrapper openModal={openModal}/>
                     </div>
                 </section>
             </main>
@@ -35,6 +35,7 @@ export const App = () => {
             <ModalWrapper
                 isOpen={isOpenModal}
                 closeModal={closeModal}
+                bgColor="#ffffff"
             >
                <WrapperTimer closeModal={closeModal}/>
             </ModalWrapper>

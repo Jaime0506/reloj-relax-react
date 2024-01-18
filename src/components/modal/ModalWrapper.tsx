@@ -7,9 +7,10 @@ interface Props {
     children: ReactNode
     isOpen: boolean
     closeModal: () => void
+    bgColor: string
 }
 
-export const ModalWrapper = ({ children, isOpen, closeModal }: Props) => {
+export const ModalWrapper = ({ children, isOpen, closeModal, bgColor }: Props) => {
 
     return (
         <AnimatePresence>
@@ -22,7 +23,7 @@ export const ModalWrapper = ({ children, isOpen, closeModal }: Props) => {
                     exit={{ opacity: 0, position: 'absolute', y: 100 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <Modal >
+                    <Modal bgColor={bgColor}>
                         {children}
                     </Modal>
                 </motion.section>

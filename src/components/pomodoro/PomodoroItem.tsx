@@ -2,16 +2,15 @@ import { useEffect, useState } from "react"
 
 import { calculateTimeLeft, formatTime } from "../../helpers"
 
-import alarm from '../../sounds/alarm.mp3'
-
 import type { Timer } from "../../types"
 
 interface PomodoroItemProps {
     timer: Timer,
     handleOnDeleteTimer: (uid: string | null) => void
+    startSound: () => void
 }
 
-export const PomodoroItem = ({handleOnDeleteTimer ,timer: { uid, pomodoro } }: PomodoroItemProps, ) => {
+export const PomodoroItem = ({ handleOnDeleteTimer, startSound ,timer: { uid, pomodoro } }: PomodoroItemProps, ) => {
     const { minute, seconds } = pomodoro
 
     // No sirve porque al controlar la visibilidad del Modal desde un estado global, estamos
@@ -20,13 +19,7 @@ export const PomodoroItem = ({handleOnDeleteTimer ,timer: { uid, pomodoro } }: P
     // Para asi mismo no disparar los modales usados en componentes Padres.
     
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(minute, seconds))
-    const [audio] = useState(new Audio(alarm))
-
-    const startSound = () => {
-        audio.play()
-    }
-  
-
+    
     useEffect(() => {
         const interval = setInterval(() => {
             setTimeLeft((prevTime) => {

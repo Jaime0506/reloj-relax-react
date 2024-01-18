@@ -3,27 +3,28 @@ import { TimerAlert } from "../timerAlert/TimerAlert"
 import { PomodoroItem } from "./PomodoroItem"
 
 interface PomodoroListProps {
-    isOpen: boolean
-    openModal: () => void
-    closeModal: () => void
+    isOpenModalAlarm: boolean
+    openModalAlarm: () => void
+    closeModalAlarm: () => void
+    startSound: () => void
 }
 
-export const PomodoroList = ({ openModal, isOpen, closeModal }: PomodoroListProps) => {
+export const PomodoroList = ({ isOpenModalAlarm, openModalAlarm, closeModalAlarm, startSound }: PomodoroListProps) => {
 
     const { timers, onDeleteTimer } = usePomodoroStore()
 
     const handleOnDeleteTimer = (uid: string | null) => {
         if (uid != null) {
             onDeleteTimer(uid)
-            openModal()
+            openModalAlarm()
         }
     }
 
     return (
         <>
-            <TimerAlert isOpen={isOpen} openModal={openModal} closeModal={closeModal} />
+            <TimerAlert isOpen={isOpenModalAlarm} openModal={openModalAlarm} closeModal={closeModalAlarm} />
             <section className="mt-7 rounded flex w-[324px] flex-col gap-4 items-center">
-                {timers.map((timer) => (<PomodoroItem key={timer.uid} timer={timer} handleOnDeleteTimer={handleOnDeleteTimer} />))}
+                {timers.map((timer) => (<PomodoroItem key={timer.uid} timer={timer} handleOnDeleteTimer={handleOnDeleteTimer} startSound={startSound} />))}
             </section>
         </>
     )

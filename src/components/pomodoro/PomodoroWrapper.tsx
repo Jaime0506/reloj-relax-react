@@ -1,13 +1,23 @@
 import { useState } from "react"
 import { PomodoroList } from "./PomodoroList"
+import alarm from '../../sounds/alarm.mp3'
 
-export const PomodoroWrapper = () => {
+interface PomodoroWrapperProps {
+    openModal: () => void
+}
 
-    const [isOpen, setIsOpen] = useState(false)
+export const PomodoroWrapper = ({ openModal }: PomodoroWrapperProps) => {
 
-    const openModal = () => setIsOpen(true)
+    const [isOpenModalAlarm, setIsOpenModalAlarm] = useState(true)
+    const [audio] = useState(new Audio(alarm))
 
-    const closeModal = () => setIsOpen(false)
+    const openModalAlarm = () => setIsOpenModalAlarm(true)
+
+    const closeModalAlarm = () => setIsOpenModalAlarm(false)
+
+    const startSound = () => {
+        audio.play()
+    }
     
     return (
         <div className="flex justify-center items-center flex-col mt-5">
@@ -18,7 +28,12 @@ export const PomodoroWrapper = () => {
                 <p className="text-gray-400 font-thin text-sm">Add pomodoro timer</p>
             </header>
 
-            <PomodoroList openModal={openModal} closeModal={closeModal} isOpen={isOpen} />
+            <PomodoroList 
+                isOpenModalAlarm={isOpenModalAlarm} 
+                closeModalAlarm={closeModalAlarm} 
+                openModalAlarm={openModalAlarm} 
+                startSound={startSound}
+            />
         </div>
     )
 }
