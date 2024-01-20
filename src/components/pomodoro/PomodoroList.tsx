@@ -15,8 +15,11 @@ export const PomodoroList = ({ isOpenModalAlarm, openModalAlarm, closeModalAlarm
 
     const handleOnDeleteTimer = (uid: string | null) => {
         if (uid != null) {
-            onDeleteTimer(uid)
+            const timerRelax = timers.find((item) =>  item.uid === uid)
+            console.log(timerRelax)
+
             openModalAlarm()
+            onDeleteTimer(uid)
         }
     }
 

@@ -10,16 +10,12 @@ interface PomodoroItemProps {
     startSound: () => void
 }
 
-export const PomodoroItem = ({ handleOnDeleteTimer, startSound ,timer: { uid, pomodoro } }: PomodoroItemProps, ) => {
+export const PomodoroItem = ({ handleOnDeleteTimer, startSound, timer: { uid, pomodoro } }: PomodoroItemProps,) => {
+
     const { minute, seconds } = pomodoro
 
-    // No sirve porque al controlar la visibilidad del Modal desde un estado global, estamos
-    // modificando ese valor en los otros componentes que usen tambien el modal, dando prioridad
-    // a los de mayor jerarquia, debo idear lamanera de que reconozca desde donde lo estan llamando
-    // Para asi mismo no disparar los modales usados en componentes Padres.
-    
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(minute, seconds))
-    
+
     useEffect(() => {
         const interval = setInterval(() => {
             setTimeLeft((prevTime) => {
@@ -42,20 +38,19 @@ export const PomodoroItem = ({ handleOnDeleteTimer, startSound ,timer: { uid, po
     }, [])
 
     return (
-        <>
-            <article className="w-[292px] rounded bg-white shadow-sm p-4 flex ">
-                <header className="flex-1">
-                    <p className="text-lg">{formatTime(timeLeft)}</p>
-                </header>
 
-                <footer className="">
-                    <i
-                        className="fa-solid fa-circle-xmark text-xl hover:cursor-pointer text-red-500"
-                        onClick={() => handleOnDeleteTimer(uid)}
-                    ></i>
-                </footer>
-            </article>
-        </>
+        <section className="w-[292px] rounded bg-white shadow-sm p-4 flex ">
+            <header className="flex-1">
+                <p className="text-lg">{formatTime(timeLeft)}</p>
+            </header>
+
+            <footer className="">
+                <i
+                    className="fa-solid fa-circle-xmark text-xl hover:cursor-pointer text-red-500"
+                    onClick={() => handleOnDeleteTimer(uid)}
+                ></i>
+            </footer>
+        </section>
     )
 }
 
