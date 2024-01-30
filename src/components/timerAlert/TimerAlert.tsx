@@ -1,5 +1,4 @@
 import { ModalWrapper } from ".."
-import { usePomodoroStore } from "../../hooks"
 
 interface TimerAlertProps {
     isOpen: boolean

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
-interface ClockProps {
-    isOpen: boolean
+interface HourProps {
+    isOpenModal: boolean
 }
 
 // Tengo que pasarle el tipo de dato que va a a contener el optionsFormatDate
@@ -14,7 +14,7 @@ const optionsFormatDate: Intl.DateTimeFormatOptions = {
     // Esto hará que el formato sea de 12 horas
 }
 
-export const Clock = ({ isOpen }: ClockProps) => {
+export const Hour = ({ isOpenModal }: HourProps) => {
 
     const [time, setTime] = useState<string>()
 
@@ -29,16 +29,16 @@ export const Clock = ({ isOpen }: ClockProps) => {
         // Se llama la funcion dependiendo si esta abierto o cerrado el modal,
         // para que cuando este abierto el modal se evite la re-rendirazion del componentes
         // ya que el usuario no lo puede ver
-        if (!isOpen) {
+        if (!isOpenModal) {
             updateTime()
         }
 
         const interval = setInterval(() => {
-            !isOpen && updateTime();
+            !isOpenModal && updateTime();
         }, 1000)
 
         return () => clearInterval(interval)
-    }, [isOpen])
+    }, [isOpenModal])
 
     return (
         <h1 className="text-white text-6xl" style={{ fontFamily: "Share Tech Mono" }}>{time}</h1>

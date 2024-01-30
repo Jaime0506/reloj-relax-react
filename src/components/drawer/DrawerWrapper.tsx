@@ -1,24 +1,24 @@
 import { motion, AnimatePresence } from 'framer-motion'
 
 import { useResizeWindow } from '../../hooks'
-import { Drawer } from './Drawer'
+import { Drawer } from './'
 import { widthDrawerController } from '../../helpers'
 
-interface Props {
-    isOpen: boolean
+interface DrawerWrapperProps {
+    isOpenDrawer: boolean
 }
 
-export const DrawerController = ({ isOpen}: Props) => {
+export const DrawerWrapper = ({ isOpenDrawer }: DrawerWrapperProps) => {
 
     const { width } = useResizeWindow()
-   
+
     return (
         <AnimatePresence>
-            {isOpen &&
+            {isOpenDrawer &&
                 <motion.div
                     key="drawer"
                     initial={{ opacity: 0, width: 0 }}
-                    animate={{ opacity: 1, width: isOpen ? widthDrawerController(width) : 0 }}
+                    animate={{ opacity: 1, width: isOpenDrawer ? widthDrawerController(width) : 0 }}
                     exit={{ opacity: 0, width: 0 }}
                     transition={{ duration: 0.5 }}
                 >

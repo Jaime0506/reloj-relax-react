@@ -1,2 +1,2 @@
 export * from './Drawer'
-export * from './DrawerController'
+export * from './DrawerWrapper'

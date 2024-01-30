@@ -1,43 +1,47 @@
 import { useState } from "react"
-import { ClockWrapper, DrawerController, ModalWrapper, Navbar, PomodoroWrapper, WrapperTimer } from "./components"
+import { ClockWrapper, DrawerWrapper, HourWrapper, ModalWrapper, Navbar, TimerWrapper } from "./components"
 
 export const App = () => {
 
-    const [isOpen, setIsOpen] = useState(false)
-    const [isOpenModal, setIsOpenModal] = useState(false)
+    const [isOpenModalClock, setIsOpenModalClock] = useState(false)
+    const [isOpenModalDrawer, setIsOpenModalDrawer] = useState(false)
 
     const toggleDrawer = () => {
-        setIsOpen(value => !value)
+        setIsOpenModalDrawer(value => !value)
     }
 
-    const openModal = () => {
-        setIsOpenModal(true)
+    const openModalClock = () => {
+        setIsOpenModalClock(true)
     }
-    
-    const closeModal = () => {
-        setIsOpenModal(false)
+
+    const closeModalClock = () => {
+        setIsOpenModalClock(false)
     }
 
     return (
         <>
             <main className="flex">
-                <DrawerController isOpen={isOpen} />
+                <DrawerWrapper isOpenDrawer={isOpenModalDrawer} />
 
                 <section className="bg-black h-screen flex flex-col flex-1">
                     <Navbar toggleDrawer={toggleDrawer} />
                     <div className="flex justify-center items-center h-full flex-col">
-                        <ClockWrapper isOpen={isOpenModal}/>
-                        <PomodoroWrapper openModal={openModal}/>
+                        <HourWrapper isOpenModal={isOpenModalClock} />
+                        {/* 
+                            TIENE SENTIDO QUE EL CONTROLADOR DEL MODAL QUE CONTIENE EL RELOJ ESTE FUERA DEL CLOCKWRAPPER ?
+                            DONDE PUTAS ESTA EL COMPONENTE DLE RELOJ CONTENIDO X EL MODAL ?
+                        */}
+                        <ClockWrapper openModal={openModalClock} />
                     </div>
                 </section>
             </main>
 
             <ModalWrapper
-                isOpen={isOpenModal}
-                closeModal={closeModal}
+                isOpen={isOpenModalClock}
+                closeModal={closeModalClock}
                 bgColor="#ffffff"
             >
-               <WrapperTimer closeModal={closeModal}/>
+                <TimerWrapper closeModal={closeModalClock} />
             </ModalWrapper>
         </>
     )

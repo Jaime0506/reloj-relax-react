@@ -1,4 +1,4 @@
 export * from './Timer'
-export * from './WrapperTimer'
+export * from './TimerWrapper'
 export * from './SelectedClockVlaues'
 export * from './SelectTime'

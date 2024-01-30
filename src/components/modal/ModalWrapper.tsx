@@ -1,16 +1,15 @@
-import { ReactNode } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import { Modal } from '..'
 
-interface Props {
-    children: ReactNode
+interface ModalWrapperProps {
+    children: React.ReactNode
     isOpen: boolean
     closeModal: () => void
     bgColor: string
 }
 
-export const ModalWrapper = ({ children, isOpen, closeModal, bgColor }: Props) => {
+export const ModalWrapper = ({ children, isOpen, closeModal, bgColor }: ModalWrapperProps) => {
 
     return (
         <AnimatePresence>
