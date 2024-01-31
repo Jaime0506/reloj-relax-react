@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from "."
-import { addTimer, deleteTimer } from "../store/pomodoro"
+import { addTimer, deleteTimer } from "../store/chronometer"
 import type { Timer } from "../types"
 
-export const usePomodoroStore = () => {
-    const { status, timers } = useAppSelector(state => state.pomodoro)
+export const useChronometerStore = () => {
+    const { status, timers } = useAppSelector(state => state.chronometerSlice)
     const dispatch = useAppDispatch()
     
     const onAddTimer = (timer: Timer) => {

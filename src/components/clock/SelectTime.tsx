@@ -7,7 +7,7 @@ import type { Dayjs } from 'dayjs'
 import type { Timer, TimerTypeSelection } from '../../types'
 
 interface TimerChanged {
-    pomodoro: boolean,
+    work: boolean,
     relax: boolean
 }
 
@@ -25,7 +25,7 @@ export const SelectTime = ({setTimer, setHasChanged, timerSelected, timer, hasCh
         if (type === 'focus') {
             setTimer({
                 ...timer,
-                ["pomodoro"]: {
+                ["work"]: {
                     minute: event?.minute(),
                     seconds: 0
                 }
@@ -33,7 +33,7 @@ export const SelectTime = ({setTimer, setHasChanged, timerSelected, timer, hasCh
 
             setHasChanged({
                 ...hasChanged,
-                pomodoro: true
+                work: true
             })
         }
 

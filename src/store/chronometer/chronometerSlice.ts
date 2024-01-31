@@ -12,8 +12,8 @@ const initialState: InitialStateType = {
     status: "start" // "pause"
 }
 
-export const pomodoroSlice = createSlice({
-    name: 'pomodoro',
+export const chronometerSlice = createSlice({
+    name: 'chronometer',
     initialState: initialState,
     reducers: {
         addTimer: (status, action: PayloadAction<Timer> ) => {
@@ -26,4 +26,4 @@ export const pomodoroSlice = createSlice({
     },
 });
 
-export const { addTimer, deleteTimer } = pomodoroSlice.actions;
+export const { addTimer, deleteTimer } = chronometerSlice.actions;

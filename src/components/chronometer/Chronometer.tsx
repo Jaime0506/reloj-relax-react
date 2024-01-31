@@ -3,18 +3,24 @@ import { useEffect, useState } from "react"
 import { calculateTimeLeft, formatTime } from "../../helpers"
 
 import type { Timer } from "../../types"
+import { useChronometerStore } from "../../hooks"
 
-interface PomodoroItemProps {
+interface ChronometerProps {
     timer: Timer,
-    handleOnDeleteTimer: (uid: string | null) => void
-    startSound: () => void
 }
 
-export const PomodoroItem = ({ handleOnDeleteTimer, startSound, timer: { uid, pomodoro } }: PomodoroItemProps,) => {
-
-    const { minute, seconds } = pomodoro
+export const Chronometer = ({timer: { uid, work } }: ChronometerProps,) => {
+    const { onDeleteTimer } = useChronometerStore()
+    const { minute, seconds } = work
 
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(minute, seconds))
+
+    const handleOnDeleteTimer = (uid: string | null) => {
+        if (uid) {
+            // onDeleteTimer(uid)
+            alert("HASTA ACA VOY DECENTE")
+        }
+    }
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -24,10 +30,10 @@ export const PomodoroItem = ({ handleOnDeleteTimer, startSound, timer: { uid, po
                 if (newTime >= 0) {
                     return newTime
                 } else {
-                    startSound()
+                    // startSound()
 
                     clearInterval(interval)
-                    handleOnDeleteTimer(uid)
+                    // handleOnDeleteTimer(uid)
                     return 0
                 }
             })
@@ -39,9 +45,9 @@ export const PomodoroItem = ({ handleOnDeleteTimer, startSound, timer: { uid, po
 
     return (
 
-        <section className="w-[292px] rounded bg-white shadow-sm p-4 flex ">
+        <section className="w-[400px] rounded bg-white shadow-sm p-4 flex mt-8 ">
             <header className="flex-1">
-                <p className="text-lg">{formatTime(timeLeft)}</p>
+                <p className="text-2xl font-clock">{formatTime(timeLeft)}</p>
             </header>
 
             <footer className="">
@@ -53,17 +59,3 @@ export const PomodoroItem = ({ handleOnDeleteTimer, startSound, timer: { uid, po
         </section>
     )
 }
-
-
-// <article className="w-[292px] rounded bg-white shadow-sm p-4 flex ">
-//             <header className="flex-1">
-//                 <p className="text-lg">{formatTime(timeLeft)}</p>
-//             </header>
-
-//             <footer className="">
-//                 <i
-//                     className="fa-solid fa-circle-xmark text-xl hover:cursor-pointer text-red-500"
-//                     onClick={handleOnDeleteTimer}
-//                 ></i>
-//             </footer>
-//         </article>

@@ -1,11 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { uiSlice } from "./ui";
-import { pomodoroSlice } from "./pomodoro";
+import { chronometerSlice } from "./chronometer";
+
 
 export const store = configureStore({
     reducer: {
-        ui: uiSlice.reducer,
-        pomodoro: pomodoroSlice.reducer
+        chronometerSlice: chronometerSlice.reducer
     }
 })
 

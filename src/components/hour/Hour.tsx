@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
+// import { useResizeWindow } from "../../hooks"
 
 interface HourProps {
-    isOpenModal: boolean
+    isOpenModalClock: boolean
 }
 
 // Tengo que pasarle el tipo de dato que va a a contener el optionsFormatDate
@@ -14,9 +15,10 @@ const optionsFormatDate: Intl.DateTimeFormatOptions = {
     // Esto hará que el formato sea de 12 horas
 }
 
-export const Hour = ({ isOpenModal }: HourProps) => {
+export const Hour = ({ isOpenModalClock }: HourProps) => {
 
     const [time, setTime] = useState<string>()
+    // const { width } = useResizeWindow()
 
     useEffect(() => {
         const updateTime = () => {
@@ -29,18 +31,19 @@ export const Hour = ({ isOpenModal }: HourProps) => {
         // Se llama la funcion dependiendo si esta abierto o cerrado el modal,
         // para que cuando este abierto el modal se evite la re-rendirazion del componentes
         // ya que el usuario no lo puede ver
-        if (!isOpenModal) {
+        if (!isOpenModalClock) {
             updateTime()
         }
 
         const interval = setInterval(() => {
-            !isOpenModal && updateTime();
+            !isOpenModalClock && updateTime();
         }, 1000)
 
         return () => clearInterval(interval)
-    }, [isOpenModal])
+    }, [isOpenModalClock])
 
     return (
-        <h1 className="text-white text-6xl" style={{ fontFamily: "Share Tech Mono" }}>{time}</h1>
+        // Pendiente nivel de proporcion de acuerdo al ancho del dispositivo
+        <h1 className="text-white text-9xl" style={{ fontFamily: "Share Tech Mono" }}>{time}</h1>
     )
 }

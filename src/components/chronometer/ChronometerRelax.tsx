@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react"
-import type { Timer } from "../../types"
 import { calculateTimeLeft, formatTime } from "../../helpers"
+import { useChronometerStore } from "../../hooks"
+
 
 interface ChronometerProps {
-    timer: Timer
+    size?: string
 }
 
-export const Chronometer = ({ timer }: ChronometerProps) => {
-    const { relax } = timer
+export const ChronometerRelax = ({ size }: ChronometerProps) => {
+    const { timers } = useChronometerStore()
 
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(relax.minute, relax.seconds))
 
@@ -28,8 +29,6 @@ export const Chronometer = ({ timer }: ChronometerProps) => {
     }, [])
 
     return (
-        <section className="w-[292px] rounded bg-white shadow-sm p-4 flex ">
-            <p className="text-lg">{formatTime(timeLeft)}</p>
-        </section>
+        <p className={`${size && "text-8xl"}`}>{formatTime(timeLeft)}</p>
     )
 }
