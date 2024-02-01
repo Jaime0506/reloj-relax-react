@@ -19,7 +19,7 @@ export const SelectedClockValues = ({ changeTimerSelected, hasChanged, timer, ti
                     className={`${hasChanged.work ? "bg-black" : "bg-black/30"} text-white rounded-sm font-clock hover:cursor-pointer text-4xl pl-3 pr-3 pt-1 pb-1 ${timerSelected === 'focus' && "animate-bounce_clock"}`}
                     onClick={() => changeTimerSelected("focus")}
                 >
-                    {timer.work.minute != undefined && timer.work.minute > 9 ? timer.work.minute : "0" + timer.work.minute} : 00
+                    {timer.work.minutes != undefined && timer.work.minutes > 9 ? timer.work.minutes : "0" + timer.work.minutes} : 00
                 </p>
 
             </article>
@@ -30,7 +30,7 @@ export const SelectedClockValues = ({ changeTimerSelected, hasChanged, timer, ti
                     className={`${hasChanged.relax ? "bg-black" : "bg-black/30"} text-white rounded-sm font-clock hover:cursor-pointer text-4xl pl-3 pr-3 pt-1 pb-1 ${timerSelected === 'relax' && "animate-bounce_clock"}`}
                     onClick={() => changeTimerSelected("relax")}
                 >
-                    {timer.relax.minute != undefined && timer.relax.minute > 9 ? timer.relax.minute : "0" + timer.relax.minute} : 00
+                    {timer.relax.minutes != undefined && timer.relax.minutes > 9 ? timer.relax.minutes : "0" + timer.relax.minutes} : 00
                 </p>
             </article>
         </section>

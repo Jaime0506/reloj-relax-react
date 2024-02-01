@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react"
 import { calculateTimeLeft, formatTime } from "../../helpers"
-import { useChronometerStore } from "../../hooks"
 
+import { Timer } from "../../types"
 
 interface ChronometerProps {
+    timer: Timer
     size?: string
 }
 
-export const ChronometerRelax = ({ size }: ChronometerProps) => {
-    const { timers } = useChronometerStore()
+export const ChronometerRelax = ({ size, timer }: ChronometerProps) => {
 
-    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(relax.minute, relax.seconds))
+    const { relax } = timer
+    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(relax.minutes, relax.seconds))
 
     useEffect(() => {
         const interval = setInterval(() => {

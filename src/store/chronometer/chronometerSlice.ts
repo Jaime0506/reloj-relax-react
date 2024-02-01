@@ -3,13 +3,23 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import type { Timer } from '../../types';
 
 interface InitialStateType {
-    timers: Timer[]
+    timer: Timer
     status: "start" | "pause"
 }
 
 const initialState: InitialStateType = {
-    timers: [],
-    status: "start" // "pause"
+    timer: {
+        work: {
+            minutes: undefined,
+            seconds: undefined
+        },
+
+        relax: {
+            minutes: undefined,
+            seconds: undefined
+        }
+    },
+    status: "pause"
 }
 
 export const chronometerSlice = createSlice({
@@ -17,11 +27,13 @@ export const chronometerSlice = createSlice({
     initialState: initialState,
     reducers: {
         addTimer: (status, action: PayloadAction<Timer> ) => {
-            status.timers.push(action.payload)
+            status.timer = (action.payload)
+            status.status = "start"
         },
 
-        deleteTimer: (state, action: PayloadAction<string>) => {
-            state.timers = state.timers.filter(item => item.uid !== action.payload)
+        deleteTimer: (state) => {
+            state.timer = initialState.timer
+            state.status = "pause"
         },
     },
 });

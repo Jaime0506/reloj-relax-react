@@ -3,7 +3,7 @@ import { addTimer, deleteTimer } from "../store/chronometer"
 import type { Timer } from "../types"
 
 export const useChronometerStore = () => {
-    const { status, timers } = useAppSelector(state => state.chronometerSlice)
+    const { status, timer } = useAppSelector(state => state.chronometerSlice)
     const dispatch = useAppDispatch()
     
     const onAddTimer = (timer: Timer) => {
@@ -13,12 +13,12 @@ export const useChronometerStore = () => {
     }
 
     const onDeleteTimer = (uid: string | null) => {
-        if (uid) dispatch(deleteTimer(uid))
+        if (uid) dispatch(deleteTimer())
     }
 
     return {
         status,
-        timers,
+        timer,
 
         onAddTimer,
         onDeleteTimer

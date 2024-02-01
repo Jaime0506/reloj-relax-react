@@ -13,12 +13,12 @@ import './index.css'
 const initialState: TypeTimer = {
     uid: null,
     work: {
-        minute: dayjs().set('minute', 20).minute(),
+        minutes: dayjs().set('minute', 20).minute(),
         seconds: 0
     },
 
     relax: {
-        minute: dayjs().set('minute', 5).minute(),
+        minutes: dayjs().set('minute', 5).minute(),
         seconds: 0
     }
 }

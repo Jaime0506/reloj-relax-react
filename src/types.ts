@@ -1,13 +1,13 @@
 export interface Timer {
-    uid: string | null,
+    uid?: string | null,
 
     work: {
-        minute: number | undefined
+        minutes: number | undefined
         seconds: number | undefined
     },
 
     relax: {
-        minute: number | undefined
+        minutes: number | undefined
         seconds: number | undefined
     }
 }

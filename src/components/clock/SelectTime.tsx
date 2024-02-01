@@ -26,7 +26,7 @@ export const SelectTime = ({setTimer, setHasChanged, timerSelected, timer, hasCh
             setTimer({
                 ...timer,
                 ["work"]: {
-                    minute: event?.minute(),
+                    minutes: event?.minute(),
                     seconds: 0
                 }
             });
@@ -41,7 +41,7 @@ export const SelectTime = ({setTimer, setHasChanged, timerSelected, timer, hasCh
             setTimer({
                 ...timer,
                 ["relax"]: {
-                    minute: event?.minute(),
+                    minutes: event?.minute(),
                     seconds: 0
                 }
             })
