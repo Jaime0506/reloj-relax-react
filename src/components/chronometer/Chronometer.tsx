@@ -2,12 +2,12 @@ import { useEffect, useState } from "react"
 import { calculateTimeLeft, formatTime } from "../../helpers"
 
 interface ChronometerProps {
-    minutes: number
-    seconds: number
-    callback: () => void
+    minutes: number | undefined
+    seconds: number | undefined
+    callback: (type: "timeOut" | "delete") => void
 }
 
-export const Chronometer = ({ minutes, seconds,callback }: ChronometerProps,) => {
+export const Chronometer = ({ minutes, seconds, callback }: ChronometerProps,) => {
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(minutes, seconds))
 
     useEffect(() => {
@@ -19,7 +19,7 @@ export const Chronometer = ({ minutes, seconds,callback }: ChronometerProps,) =>
                     return newTime
                 } else {
                     clearInterval(interval)
-                    callback()
+                    callback("timeOut")
                     return 0
                 }
             })

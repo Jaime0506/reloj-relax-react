@@ -31,12 +31,11 @@ export const App = () => {
                     <div className="flex justify-center items-center h-full flex-col">
                         <Hour isOpenModalClock={isOpenModalClock} />
                         {
-                            !timer.uid ? (
+                            !timer.uid && (
                                 <button className="fa-solid rounded-full mt-5 bg-white w-8 h-8 flex fa-plus text-black hover:cursor-pointer hover:text-xl ease-in-out duration-300 items-center justify-center" onClick={openModalClock}></button>
-                            ) : (
-                                <ChronometerWork />
                             )
                         }
+                        <ChronometerWork />
                     </div>
                 </section>
             </main>
