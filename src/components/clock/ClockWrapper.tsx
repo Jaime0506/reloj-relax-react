@@ -68,7 +68,7 @@ export const ClockWrapper = ({ closeModal }: ClockWrapperProps) => {
 
 
             <AnimatePresence>
-                {hasChanged.work && hasChanged.relax && (
+                {timer.work.minutes != 0 && hasChanged.relax && (
                     <motion.button
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}

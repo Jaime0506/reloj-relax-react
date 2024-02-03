@@ -1,15 +1,15 @@
 import { useState } from "react"
 import { ModalWrapper } from ".."
 import { useChronometerStore } from "../../hooks"
-import { Chronometer } from "./"
+import { Chronometer, TimeOutAlert } from "./"
 
-import alarm from '../../sounds/alarm.mp3'
+import alert from '../../sounds/alarm.mp3'
 
 export const ChronometerWork = () => {
 
     const { onDeleteTimer, timer } = useChronometerStore()
     const [isOpenAlertModal, setIsOpenAlertModal] = useState(false)
-    const [audio] = useState(new Audio(alarm))
+    const [audio] = useState(new Audio(alert))
 
     const { minutes, seconds } = timer.work
 
@@ -19,18 +19,13 @@ export const ChronometerWork = () => {
 
     const closeModal = () => {
         setIsOpenAlertModal(false)
+        timer.uid && onDeleteTimer(timer.uid)
     }
-
-    const startSound = () => [
-        audio.play()
-    ]
 
     const handleOnDeleteTimer = (type: "timeOut" | "delete") => {
         if (timer.uid) {
             if (type === "timeOut") {
                 openModal()
-                onDeleteTimer(timer.uid)
-                startSound()
             } else {
                 onDeleteTimer(timer.uid)
             }
@@ -61,7 +56,7 @@ export const ChronometerWork = () => {
                 isOpen={isOpenAlertModal}
                 closeModal={closeModal}
             >
-                Hola mi gente
+                <TimeOutAlert closeModal={closeModal} audio={audio} />
             </ModalWrapper>
         </>
     )
