@@ -4,7 +4,6 @@ import type { Timer } from '../../types';
 
 interface InitialStateType {
     timer: Timer
-    status: "start" | "pause"
 }
 
 const initialState: InitialStateType = {
@@ -19,7 +18,6 @@ const initialState: InitialStateType = {
             seconds: undefined
         }
     },
-    status: "pause"
 }
 
 export const chronometerSlice = createSlice({
@@ -28,14 +26,20 @@ export const chronometerSlice = createSlice({
     reducers: {
         addTimer: (status, action: PayloadAction<Timer> ) => {
             status.timer = (action.payload)
-            status.status = "start"
         },
 
         deleteTimer: (state) => {
             state.timer = initialState.timer
-            state.status = "pause"
         },
+
+        deleteTimerWork: (state) => {
+            state.timer.work = initialState.timer.work
+        },
+
+        deleteTimerRelax: (state) => {
+            state.timer.relax = initialState.timer.relax
+        }
     },
 });
 
-export const { addTimer, deleteTimer } = chronometerSlice.actions;
+export const { addTimer, deleteTimer, deleteTimerWork, deleteTimerRelax, } = chronometerSlice.actions;

@@ -1,6 +1,5 @@
 interface TimeOutAlertProps {
     closeModal: () => void
-    // audio: HTMLAudioElement
 }
 
 export const TimeOutAlert = ({ closeModal }: TimeOutAlertProps) => {

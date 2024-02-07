@@ -1,27 +1,36 @@
 import { useAppDispatch, useAppSelector } from "."
-import { addTimer, deleteTimer } from "../store/chronometer"
+import { addTimer, deleteTimer, deleteTimerRelax, deleteTimerWork } from "../store/chronometer"
+
 import type { Timer } from "../types"
 
 export const useChronometerStore = () => {
-    const { status, timer } = useAppSelector(state => state.chronometerSlice)
+    const { timer } = useAppSelector(state => state.chronometerSlice)
     const dispatch = useAppDispatch()
-    
+
     const onAddTimer = (timer: Timer) => {
         const UUID = crypto.randomUUID()
 
-        dispatch(addTimer({...timer, uid: UUID}))
+        dispatch(addTimer({ ...timer, uid: UUID }))
     }
 
     const onDeleteTimer = (uid: string | null) => {
         if (uid) dispatch(deleteTimer())
     }
 
+    const onDeleteTimerWork = () => {
+        dispatch(deleteTimerWork())
+    }
+
+    const onDeleteTimerRelax = () => {
+        dispatch(deleteTimerRelax())
+    }
+
     return {
-        status,
         timer,
 
         onAddTimer,
-        onDeleteTimer
+        onDeleteTimer,
+        onDeleteTimerWork,
+        onDeleteTimerRelax
     }
-
 }

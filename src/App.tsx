@@ -1,6 +1,7 @@
 import { useState } from "react"
-import { DrawerWrapper, Hour, ModalWrapper, Navbar, ClockWrapper, ChronometerWork } from "./components"
+import { DrawerWrapper, Hour, ModalWrapper, Navbar, ClockWrapper } from "./components"
 import { useChronometerStore } from "./hooks"
+import { ChronometerWrapper } from "./components/chronometer/ChronometerWrapper"
 
 export const App = () => {
 
@@ -35,7 +36,7 @@ export const App = () => {
                                 <button className="fa-solid rounded-full mt-5 bg-white w-8 h-8 flex fa-plus text-black hover:cursor-pointer hover:text-xl ease-in-out duration-300 items-center justify-center" onClick={openModalClock}></button>
                             )
                         }
-                        <ChronometerWork />
+                        <ChronometerWrapper />
                     </div>
                 </section>
             </main>

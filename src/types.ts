@@ -13,4 +13,6 @@ export interface Timer {
 }
 
 export type TimerTypeSelection = "focus" | "relax"
+
+export type TypeChronometer = "work" | "relax"
     
