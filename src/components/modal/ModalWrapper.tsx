@@ -1,11 +1,12 @@
 import { AnimatePresence, motion } from 'framer-motion'
 
 import { Modal } from '..'
+import { TypeChronometer } from '../../types'
 
 interface ModalWrapperProps {
     children: React.ReactNode
     isOpen: boolean
-    closeModal: () => void
+    closeModal: (type?: TypeChronometer) => void
     bgColor: string
 }
 
@@ -16,7 +17,7 @@ export const ModalWrapper = ({ children, isOpen, closeModal, bgColor }: ModalWra
             {isOpen && (
                 <motion.section
                     className="absolute top-0 flex bg-gray-950 bg-opacity-50 w-screen h-screen flex-col justify-center items-center"
-                    onClick={closeModal}
+                    onClick={() => closeModal()}
                     initial={{ opacity: 0, position: 'absolute', y: 100 }}
                     animate={{ opacity: 1, position: 'absolute', y: 0 }}
                     exit={{ opacity: 0, position: 'absolute', y: 100 }}

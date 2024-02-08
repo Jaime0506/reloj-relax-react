@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react"
 import { calculateTimeLeft, formatTime } from "../../helpers"
+import { TypeChronometer } from "../../types"
 
 interface ChronometerProps {
     minutes?: number | undefined
     seconds?: number | undefined
     timeOut: () => void 
+    type: TypeChronometer
 }
 
-export const Chronometer = ({ minutes = 0, seconds = 3, timeOut }: ChronometerProps,) => {
+export const Chronometer = ({ minutes = 0, seconds = 3, timeOut, type }: ChronometerProps,) => {
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(minutes, seconds))
 
     useEffect(() => {
@@ -37,5 +39,5 @@ export const Chronometer = ({ minutes = 0, seconds = 3, timeOut }: ChronometerPr
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [timeLeft])
 
-    return <p className="text-2xl font-clock">{formatTime(timeLeft)}</p>
+    return <p className={`${type === "work" ? "text-black" : "text-white" } text-2xl font-clock`}>{formatTime(timeLeft)}</p>
 }

@@ -13,8 +13,8 @@ export const useChronometerStore = () => {
         dispatch(addTimer({ ...timer, uid: UUID }))
     }
 
-    const onDeleteTimer = (uid: string | null) => {
-        if (uid) dispatch(deleteTimer())
+    const onDeleteTimer = () => {
+        dispatch(deleteTimer())
     }
 
     const onDeleteTimerWork = () => {
