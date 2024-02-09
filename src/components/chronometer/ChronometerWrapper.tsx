@@ -33,7 +33,7 @@ export const ChronometerWrapper = () => {
                     isOpen={isOpenAlertModal}
                     closeModal={closeModal}
                 >
-                    <button onClick={timeOut}>HOLA</button>
+                    <TimeOutAlert closeModal={closeModal} type="relax" />
                 </ModalWrapper>
             </>
         )
