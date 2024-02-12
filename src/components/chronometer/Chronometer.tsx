@@ -9,7 +9,7 @@ interface ChronometerProps {
     type: TypeChronometer
 }
 
-export const Chronometer = ({ minutes = 0, seconds = 3, timeOut, type }: ChronometerProps,) => {
+export const Chronometer = ({ minutes, seconds, timeOut, type }: ChronometerProps,) => {
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(minutes, seconds))
 
     useEffect(() => {

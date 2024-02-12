@@ -1,7 +1,7 @@
-import { useState } from "react"
-import { DrawerWrapper, Hour, ModalWrapper, Navbar, ClockWrapper } from "./components"
+import { ReactNode, useEffect, useState } from "react"
+import { DrawerWrapper, ModalWrapper, Hour, Navbar, ClockWrapper, ChronometerWrapper } from "./components"
 import { useChronometerStore } from "./hooks"
-import { ChronometerWrapper } from "./components/chronometer/ChronometerWrapper"
+import { ContainerProps } from "@mui/material"
 
 export const App = () => {
 
@@ -12,6 +12,18 @@ export const App = () => {
 
     const toggleDrawer = () => {
         setIsOpenModalDrawer(value => !value)
+    }
+
+    const closeDrawerIfIsOpen = () => {
+        console.log("ME clickearon")
+
+        if (isOpenModalDrawer) {
+            setIsOpenModalDrawer(false)
+        }
+    }
+
+    const test = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+        e.stopPropagation()
     }
 
     const openModalClock = () => {
@@ -27,18 +39,20 @@ export const App = () => {
             <main className="flex">
                 <DrawerWrapper isOpenDrawer={isOpenModalDrawer} />
 
-                <section className="bg-black h-screen flex flex-col flex-1">
-                    <Navbar toggleDrawer={toggleDrawer} />
-                    <div className="flex justify-center items-center h-full flex-col">
-                        <Hour isOpenModalClock={isOpenModalClock} />
-                        {
-                            !timer.uid && (
-                                <button className="fa-solid rounded-full mt-5 bg-white w-8 h-8 flex fa-plus text-black hover:cursor-pointer hover:text-xl ease-in-out duration-300 items-center justify-center" onClick={openModalClock}></button>
-                            )
-                        }
-                        <ChronometerWrapper />
-                    </div>
-                </section>
+                <Container onClick={() => console.log("CLICK AMI")}>
+                    <section className="bg-black h-screen flex flex-col flex-1">
+                        <Navbar toggleDrawer={toggleDrawer} />
+                        <div className="flex justify-center items-center h-full flex-col">
+                            <Hour isOpenModalClock={isOpenModalClock} />
+                            {
+                                !timer.uid && (
+                                    <button className="fa-solid rounded-full mt-5 bg-white w-8 h-8 flex fa-plus text-black hover:cursor-pointer hover:text-xl ease-in-out duration-300 items-center justify-center" onClick={openModalClock}></button>
+                                )
+                            }
+                            <ChronometerWrapper />
+                        </div>
+                    </section>
+                </Container>
             </main>
 
             <ModalWrapper
@@ -49,5 +63,25 @@ export const App = () => {
                 <ClockWrapper closeModal={closeModalClock} />
             </ModalWrapper>
         </>
+    )
+}
+
+interface ContainerProps {
+    children: ReactNode
+    onClick: () => void
+}
+
+const Container = ({ children, onClick }: ContainerProps) => {
+
+    const test = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        if (event.target === event.currentTarget)  {
+            onClick()
+        }
+    }
+
+    return (
+        <div className="bg-red-400 w-full h-screen absolute opacity" onClick={test}>
+            { children }
+        </div>
     )
 }

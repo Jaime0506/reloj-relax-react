@@ -11,5 +11,5 @@ export const ChronometerWork = ({ minutes, seconds, handleOnDeleteTimer, timeOut
 
     if (typeof minutes !== "number" || typeof seconds !== "number") return null
 
-    return <ChronometerCard handleOnDeleteTimer={handleOnDeleteTimer} timeOut={timeOut} type="work" />
+    return <ChronometerCard handleOnDeleteTimer={handleOnDeleteTimer} timeOut={timeOut} type="work" minutes={minutes} seconds={seconds} />
 }

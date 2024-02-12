@@ -1,6 +1,6 @@
 
-import { TypeChronometer } from "../../types"
 import { ChronometerCard } from "./"
+import type { TypeChronometer } from "../../types"
 
 interface ChronometerRelaxProps {
     minutes: number | undefined
@@ -13,7 +13,5 @@ export const ChronometerRelax = ({ minutes, seconds, handleOnDeleteTimer, timeOu
 
     if (typeof minutes !== "number" || typeof seconds !== "number") return null
     
-    return <ChronometerCard handleOnDeleteTimer={handleOnDeleteTimer} timeOut={timeOut} type="relax" />
-        
-    
+    return <ChronometerCard handleOnDeleteTimer={handleOnDeleteTimer} timeOut={timeOut} type="relax" minutes={minutes} seconds={seconds} />
 }

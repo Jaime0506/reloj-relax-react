@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 
 import { Modal } from '..'
-import { TypeChronometer } from '../../types'
+import type { TypeChronometer } from '../../types'
 
 interface ModalWrapperProps {
     children: React.ReactNode
